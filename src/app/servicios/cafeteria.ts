@@ -13,9 +13,10 @@ export class CafeteriaService {
     return await db.categorias.toArray();
   }
 
-  async guardarCategoria(categoria: Categoria) {
-    return await db.categorias.add(categoria);
-  }
+  
+async guardarCategoria(categoria: Categoria) {
+    return await db.categorias.put(categoria);
+}
 
   async eliminarCategoria(id: number) {
     return await db.categorias.delete(id);

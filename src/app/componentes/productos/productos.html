@@ -3,15 +3,18 @@
   
   <div class="row g-3 border-bottom pb-4 mb-4">
     <div class="col-md-4">
+      <label class="form-label small fw-bold">Nombre del Producto</label>
       <input type="text" 
        class="form-control" 
        [(ngModel)]="nuevoProducto.nombre" 
        name="nombProd" 
        #nombre="ngModel"
        (keyup.enter)="agregar()" 
+       placeholder="Ej: Café Americano"
        required>
     </div>
     <div class="col-md-2">
+      <label class="form-label small fw-bold">Precio</label>
       <input type="number" 
        class="form-control" 
        [(ngModel)]="nuevoProducto.precio" 
@@ -20,17 +23,19 @@
        required>
     </div>
     <div class="col-md-3">
+      <label class="form-label small fw-bold">Categoría</label>
       <select class="form-select" [(ngModel)]="nuevoProducto.categoriaId">
         <option value="0">Seleccionar Categoría...</option>
         <option *ngFor="let cat of listaCategorias" [value]="cat.id">{{cat.nombre}}</option>
       </select>
     </div>
-    <div class="col-md-3">
-<button class="btn btn-success w-100" 
-        (mousedown)="agregar()" 
-        type="button">
-  + Agregar Producto
-</button>    </div>
+    <div class="col-md-3 d-flex align-items-end">
+      <button [class]="idEnEdicion ? 'btn btn-warning w-100' : 'btn btn-success w-100'" 
+              (click)="agregar()" 
+              type="button">
+        {{ idEnEdicion ? '💾 Guardar Cambios' : '+ Agregar Producto' }}
+      </button>
+    </div>
   </div>
 
   <table class="table table-striped">
@@ -48,6 +53,8 @@
         <td>{{ prod.precio | currency:'BOB ':'symbol':'1.2-2' }}</td>
         <td><span class="badge bg-info text-dark">{{ getNombreCategoria(prod.categoriaId) }}</span></td>
         <td>
+          <button class="btn btn-warning btn-sm me-2" (click)="editar(prod)">Editar</button>
+          
           <button class="btn btn-danger btn-sm" (click)="borrar(prod.id)">Eliminar</button>
         </td>
       </tr>

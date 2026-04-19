@@ -6,14 +6,14 @@ export interface Pedido { id?: number; cliente: string; fecha: string; productoI
 
 export class CafeteriaDatabase extends Dexie {
   categorias!: Table<Categoria>;
-  productos!: Table<Producto>; // <--- REVISA QUE ESTA LÍNEA ESTÉ
+  productos!: Table<Producto>; 
   pedidos!: Table<Pedido>;
 
   constructor() {
     super('CafeteriaDB');
     this.version(1).stores({
       categorias: '++id, nombre',
-      productos: '++id, nombre, precio, categoriaId', // <--- Y ESTA TAMBIÉN
+      productos: '++id, nombre, precio, categoriaId', 
       pedidos: '++id, cliente, productoId'
     });
   }
