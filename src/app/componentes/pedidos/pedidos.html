@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card p-4 shadow-sm border-primary">
+      <h4>📝 Nuevo Pedido</h4>
+      <hr>
+      <div class="mb-3">
+        <label class="form-label">Nombre del Cliente</label>
+        <input type="text" class="form-control" [(ngModel)]="nuevoPedido.cliente">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Seleccionar Producto</label>
+        <select class="form-select" [(ngModel)]="nuevoPedido.productoId">
+          <option value="0">-- Elija un producto --</option>
+          <option *ngFor="let p of listaProductos" [value]="p.id">
+            {{ p.nombre }} ({{ p.precio | currency:'BOB' }})
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Cantidad</label>
+        <input type="number" class="form-control" [(ngModel)]="nuevoPedido.cantidad">
+      </div>
+      <button class="btn btn-primary w-100" (click)='registrarPedido()'>Confirmar Venta</button>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card p-4 shadow-sm">
+      <h4>📊 Historial de Ventas</h4>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cant.</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ped of listaPedidos">
+            <td><strong>{{ ped.cliente }}</strong></td>
+            <td>{{ getNombreProducto(ped.productoId) }}</td>
+            <td>{{ ped.cantidad }}</td>
+            <td><small class="text-muted">{{ ped.fecha }}</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
